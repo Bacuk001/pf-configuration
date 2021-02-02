@@ -11,24 +11,20 @@ management:
 #-------------------------------------------
 spring:
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: validate
-      jdbc:
-        batch_size: 4
+      jdbc.batch_size: 4
     properties:
-      javax.persistence:
-        schema-generation.database.action: none
-  servlet:
-    multipart:
-      enabled: true    
-      max-file-size: 2050MB
-      maxRequestSize: 2050MB  
-      resolve-lazily: true   
-  datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
-    driverClassName: org.h2.Driver 
-  h2.console.enabled: true
+      javax.persistence.schema-generation.database.action: none
+  servlet.multipart:
+    enabled: true    
+    max-file-size: 2050MB
+    maxRequestSize: 2050MB  
+    resolve-lazily: true   
+hana:
+  url: ${vcap.services.pf-hdb-schemas.credentials.url}
+  user: ${vcap.services.pf-hdb-schemas.credentials.user}
+  password: ${vcap.services.pf-hdb-schemas.credentials.password}
 # =====================
 # [ Object store Properties ]
 # =====================
@@ -37,7 +33,6 @@ objectstore:
     accessKeyId: AKIAWSCM7XP3LOMKCIBA
     bucket: hcp-79d7d7cf-494e-46ce-951a-b9330fb26d72
     secretAccessKey: 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
-server.port: 8081
-aa.role: 55
+
 
 
