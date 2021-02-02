@@ -38,5 +38,6 @@ objectstore:
     bucket: hcp-79d7d7cf-494e-46ce-951a-b9330fb26d72
     secretAccessKey: Gs9bru7hYAmQcryIIvxZEcEW+0KqvvU9EH2H9c8H
 server.port: 8081
+aa.role: 55
 
 
