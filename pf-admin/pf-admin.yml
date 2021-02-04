@@ -1,4 +1,12 @@
 #-------------------------------------------
+#       String Actuator Configuration
+#-------------------------------------------
+management:
+  endpoints:
+    web:
+      exposure:
+        include: heapdump,threaddump,beans
+#-------------------------------------------
 #      Spring Properties
 #-------------------------------------------
 spring:
@@ -16,11 +24,9 @@ spring:
       max-file-size: 2050MB
       maxRequestSize: 2050MB  
       resolve-lazily: true   
-  datasource:
-    url: jdbc:sap://localhost:39041/?databaseName=HXE&reconnect=true&statementCacheSize=512
-    driverClassName: com.sap.db.jdbc.Driver
-    username: SYSTEM
-    password: A77d8C84bca1
+#-------------------------------------------
+#  Object store Properties 
+#-------------------------------------------
 objectstore:
   credentials:
     accessKeyId: AKIAWSCM7XP3LOMKCIBA

@@ -1,38 +1,7 @@
-#-------------------------------------------
-#       String Actuator Configuration
-#-------------------------------------------
-management:
-  endpoints:
-    web:
-      exposure:
-        include: heapdump,threaddump,beans
-#-------------------------------------------
-#      Spring Properties
-#-------------------------------------------
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: validate
-      jdbc.batch_size: 4
-    properties:
-      javax.persistence.schema-generation.database.action: none
-  servlet.multipart:
-    enabled: true    
-    max-file-size: 2050MB
-    maxRequestSize: 2050MB  
-    resolve-lazily: true   
 hana:
   url: ${vcap.services.pf-hdb-schemas.credentials.url}
   user: ${vcap.services.pf-hdb-schemas.credentials.user}
   password: ${vcap.services.pf-hdb-schemas.credentials.password}
-# =====================
-# [ Object store Properties ]
-# =====================
-objectstore:
-  credentials:
-    accessKeyId: AKIAWSCM7XP3LOMKCIBA
-    bucket: hcp-79d7d7cf-494e-46ce-951a-b9330fb26d72
-    secretAccessKey: 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
 
 
 
