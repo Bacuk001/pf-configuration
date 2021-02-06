@@ -1,0 +1,51 @@
+#-------------------------------------------
+#       String Actuator Configuration
+#-------------------------------------------
+management:
+  endpoints:
+    web:
+      exposure:
+        include: heapdump,threaddump,beans
+#-------------------------------------------
+#    SAP HANA Search Configuration
+#-------------------------------------------
+repository:
+  name: pfnextgen
+  destination: search
+  filters:
+    cacheEvict:
+      solutions: 0 0 0 ? * *
+      industries: 0 0 0 ? * *
+      engagements: 0 0 0 ? * *
+  search:
+    author: PFDEV
+    outputFields: TITLE,DESCRIPTION,PROFILE_ID,RATINGS,COUNTRY,CONSULTANTS,CITY,AUTHOR,CLOUD_IMPL,LOGO_URL,LOCATION
+    requestType: content
+    boostField: FACTOR
+    defaultPageSize: 10
+    fieldSearchNames: PRODUCTS:OR, INDUSTRY:OR, LOCATION:OR, TITLE:NULL
+    distribution:
+      distributionSize: 50
+  suggest:
+    outputFields: term,BUCKET
+    groupOder: partner,solution
+    requestType: search_terms
+    pageSize: 10
+    filterFieldName: term
+#-------------------------------------------
+#      Spring Properties
+#-------------------------------------------
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      jdbc:
+        batch_size: 4
+    properties:
+      javax.persistence:
+        schema-generation.database.action: none
+hana:
+  url: ${vcap.services.pf-hdb-schemas.credentials.url}
+  user: ${vcap.services.pf-hdb-schemas.credentials.user}
+  password: ${vcap.services.pf-hdb-schemas.credentials.password}
+

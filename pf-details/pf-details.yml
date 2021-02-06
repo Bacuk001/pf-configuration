@@ -1,0 +1,73 @@
+#-------------------------------------------
+#       String Actuator Configuration
+#-------------------------------------------
+management:
+  endpoints:
+    web:
+      exposure:
+        include: heapdump,threaddump,beans
+#-------------------------------------------
+#      Spring Properties
+#-------------------------------------------
+spring:
+  messages:
+    basename: messages
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      jdbc:
+        batch_size: 4
+    properties:
+      javax.persistence:
+        schema-generation.database.action: none
+  task:
+    execution:
+      thread-name-prefix: async-task-
+      pool:
+        core-size: 2
+        max-size: 20
+        queue-capacity: 1000
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  cache:
+    cache-names: odpPartnerProfile
+c4s:
+  destination: "c4s"
+  headerUrl: Partner_Finder_Header_Data?$filter=Partner_Group_ID_PGI eq '{profileId}'&$format=json
+  addressUrl: Partner_Finder_Address_Data?$filter=Partner_Group_Identifier_PGI_ eq '{profileId}'&$format=json
+prm:
+  destination: 'ext_pw'
+  url: '/sap/opu/odata/sap/prmservice'
+partner:
+  cache:
+    cacheEvict: 0 0 0 ? * *
+indexer:
+  destination: search-index
+  repository: PFNEXTGEN
+  requestType: CONTENT
+  author: PFDEV
+  cron: 0 0 0 * * SUN
+hana:
+  url: ${vcap.services.pf-hdb-schemas.credentials.url}
+  user: ${vcap.services.pf-hdb-schemas.credentials.user}
+  password: ${vcap.services.pf-hdb-schemas.credentials.password}
+objectstore:
+  credentials:
+    accessKeyId: ${vcap.services.pf-media.credentials.access_key_id}
+    secretAccessKey: ${vcap.services.pf-media.credentials.secret_access_key}
+    bucket: ${vcap.services.pf-media.credentials.bucket}
+    region: ${vcap.services.pf-media.credentials.region}
+spring.security.oauth2.client:
+  registration.custom:
+    client-id: ${vcap.services.pf-xsuaa.credentials.clientid}
+    client-secret: ${vcap.services.pf-xsuaa.credentials.clientsecret}
+    redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+    authorization-grant-type: authorization_code
+    client_name: ${vcap.services.pf-xsuaa.credentials.xsappname}
+  provider.custom:
+    token-uri: ${vcap.services.pf-xsuaa.credentials.url}/oauth/token
+    authorization-uri: ${vcap.services.pf-xsuaa.credentials.url}/oauth/authorize
+    user-info-uri: ${vcap.services.pf-xsuaa.credentials.url}/config?action=who
+    user-name-attribute: commit_id
