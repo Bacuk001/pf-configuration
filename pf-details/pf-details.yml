@@ -71,3 +71,5 @@ spring.security.oauth2.client:
     authorization-uri: ${vcap.services.pf-xsuaa.credentials.url}/oauth/authorize
     user-info-uri: ${vcap.services.pf-xsuaa.credentials.url}/config?action=who
     user-name-attribute: commit_id
+disableLocalProfileAuthorization: true
+
